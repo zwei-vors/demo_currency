@@ -32,6 +32,10 @@ public class CurrencyService {
         return currencyRepository.findAll().stream().map(CurrencyResponseDto::toDto).toList();
     }
 
+    public List<Currency> findCurrencies() {
+        return currencyRepository.findAll();
+    }
+
     @Transactional
     public CurrencyResponseDto save(CurrencyRequestDto currencyRequestDto) {
         Currency savedCurrency = currencyRepository.save(currencyRequestDto.toEntity());

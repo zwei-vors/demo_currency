@@ -1,4 +1,4 @@
-package com.sparta.demo_currency;
+package com.sparta.demo_currency.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
