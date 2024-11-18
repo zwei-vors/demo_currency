@@ -8,5 +8,5 @@ import java.util.List;
 
 @Repository
 public interface CurrencyExchangeRepository extends JpaRepository<CurrencyExchange, Long> {
-    List<CurrencyExchange> findAllByEmail(String email);
+    List<CurrencyExchange> findAllByUserId(Long userId);
 }

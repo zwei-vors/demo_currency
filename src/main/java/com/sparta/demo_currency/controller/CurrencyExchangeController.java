@@ -23,8 +23,8 @@ public class CurrencyExchangeController {
     }
 
     @GetMapping
-    public ResponseEntity<List<CurrencyExchangeResponseDto>> getExchangeCurrency(@RequestParam String email) {
-        return ResponseEntity.ok().body(currencyExchangeService.findAll(email));
+    public ResponseEntity<List<CurrencyExchangeResponseDto>> getExchangeCurrency(@RequestParam Long userId) {
+        return ResponseEntity.ok().body(currencyExchangeService.findAll(userId));
     }
 
     @PatchMapping("/{id}")

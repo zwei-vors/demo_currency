@@ -13,7 +13,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -21,6 +20,8 @@ public class CurrencyExchangeService {
     private final CurrencyExchangeRepository currencyExchangeRepository;
     private final UserService userService;
     private final CurrencyService currencyService;
+
+    final int ROUND_NUMBER = 2;
 
     @Transactional
     public CurrencyExchangeResponseDto exchangeRequest(CurrencyExchangeRequestDto requestDto) {
@@ -30,7 +31,7 @@ public class CurrencyExchangeService {
         Currency toCurrencyById = currencyService.findCurrencyById(requestDto.getToCurrencyId());
 
         // TODO: 여기서 계산을 하는게 맞는지 고민 필요
-        BigDecimal amountAfterExchange = requestDto.getAmountInKrw().divide(toCurrencyById.getExchangeRate(), 2, RoundingMode.HALF_UP);
+        BigDecimal amountAfterExchange = requestDto.getAmountInKrw().divide(toCurrencyById.getExchangeRate(), ROUND_NUMBER, RoundingMode.HALF_UP);
 
         CurrencyExchange currencyExchange = new CurrencyExchange(user, fromCurrencyById, toCurrencyById, requestDto.getAmountInKrw(), amountAfterExchange, requestDto.getStatus());
         CurrencyExchange savedCurrencyExchange = currencyExchangeRepository.save(currencyExchange);
@@ -50,8 +51,8 @@ public class CurrencyExchangeService {
         return currencyExchangeRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("환전 요청 기록을 찾을 수 없습니다."));
     }
 
-    public List<CurrencyExchangeResponseDto> findAll(String email) {
-        List<CurrencyExchange> currencyExchanges = currencyExchangeRepository.findAllByEmail(email);
+    public List<CurrencyExchangeResponseDto> findAll(Long userId) {
+        List<CurrencyExchange> currencyExchanges = currencyExchangeRepository.findAllByUserId(userId);
 
         return currencyExchanges.stream().map(CurrencyExchangeResponseDto::toDto).toList();
     }
