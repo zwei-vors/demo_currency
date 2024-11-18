@@ -31,5 +31,11 @@ public class UserController {
         return ResponseEntity.ok().body(userService.save(userRequestDto));
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteUser(@PathVariable Long id) {
+        userService.deleteUserById(id);
+        return ResponseEntity.ok().body("정상적으로 삭제되었습니다.");
+    }
+
 
 }

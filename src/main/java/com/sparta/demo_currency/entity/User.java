@@ -1,12 +1,10 @@
 package com.sparta.demo_currency.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Getter;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Getter
@@ -20,6 +18,9 @@ public class User {
     private String status;
     private LocalDateTime createdAt; // TODO: BaseEntity 분리 필요
     private LocalDateTime modifiedAt;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<CurrencyExchange> currencyExchange;
 
     public User(String name, String email, String status) {
         this.name = name;
