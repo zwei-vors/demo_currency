@@ -7,11 +7,10 @@ import jakarta.persistence.Id;
 import lombok.Getter;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
 
 @Entity
 @Getter
-public class Currency {
+public class Currency extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -19,8 +18,6 @@ public class Currency {
     private String currencyName;
     private BigDecimal exchangeRate;
     private String symbol;
-    private LocalDateTime createdAt; // TODO: BaseEntity 분리 필요
-    private LocalDateTime modifiedAt;
 
     public Currency(String currencyName, BigDecimal exchangeRate, String symbol) {
         this.currencyName = currencyName;

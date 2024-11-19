@@ -3,12 +3,11 @@ package com.sparta.demo_currency.entity;
 import jakarta.persistence.*;
 import lombok.Getter;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
 @Getter
-public class User {
+public class User extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -16,8 +15,6 @@ public class User {
     private String name;
     private String email;
     private String status;
-    private LocalDateTime createdAt; // TODO: BaseEntity 분리 필요
-    private LocalDateTime modifiedAt;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<CurrencyExchange> currencyExchange;

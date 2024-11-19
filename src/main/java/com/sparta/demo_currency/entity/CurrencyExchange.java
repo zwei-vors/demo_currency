@@ -4,11 +4,10 @@ import jakarta.persistence.*;
 import lombok.Getter;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
 
 @Entity
 @Getter
-public class CurrencyExchange {
+public class CurrencyExchange extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -24,8 +23,6 @@ public class CurrencyExchange {
     private BigDecimal amountInKrw;
     private BigDecimal amountAfterExchange;
     private String status;
-    private LocalDateTime createdAt;
-    private LocalDateTime modifiedAt;
 
     public CurrencyExchange(User user, Currency toCurrency, BigDecimal amountInKrw, BigDecimal amountAfterExchange, String status) {
         this.user = user;

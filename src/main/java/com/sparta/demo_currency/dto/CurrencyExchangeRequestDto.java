@@ -12,5 +12,4 @@ public class CurrencyExchangeRequestDto {
 
     private BigDecimal amountInKrw;
     private String status;
-
 }
