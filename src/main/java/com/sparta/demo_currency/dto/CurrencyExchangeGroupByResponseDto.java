@@ -6,12 +6,10 @@ import java.math.BigDecimal;
 
 @Getter
 public class CurrencyExchangeGroupByResponseDto {
-    private String currencyName;
     private Long count;
     private BigDecimal totalAmountInKrw;
 
-    public CurrencyExchangeGroupByResponseDto(String currencyName, Long count, BigDecimal totalAmountInKrw) {
-        this.currencyName = currencyName;
+    public CurrencyExchangeGroupByResponseDto(Long count, BigDecimal totalAmountInKrw) {
         this.count = count;
         this.totalAmountInKrw = totalAmountInKrw;
     }
