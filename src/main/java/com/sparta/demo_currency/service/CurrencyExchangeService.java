@@ -7,7 +7,6 @@ import com.sparta.demo_currency.entity.Currency;
 import com.sparta.demo_currency.entity.CurrencyExchange;
 import com.sparta.demo_currency.entity.User;
 import com.sparta.demo_currency.repository.CurrencyExchangeRepository;
-import com.sparta.demo_currency.repository.CurrencyExchangeRepositoryWithJPQL;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,7 +19,6 @@ import java.util.List;
 @RequiredArgsConstructor
 public class CurrencyExchangeService {
     private final CurrencyExchangeRepository currencyExchangeRepository;
-    private final CurrencyExchangeRepositoryWithJPQL currencyExchangeRepositoryWithJPQL;
     private final UserService userService;
     private final CurrencyService currencyService;
 
@@ -65,6 +63,6 @@ public class CurrencyExchangeService {
     }
 
     public List<CurrencyExchangeGroupByResponseDto> getExchangeRequestsGroupedByCurrency(Long userId) {
-        return currencyExchangeRepositoryWithJPQL.findExchangeRequestsGroupedByCurrency(userId);
+        return currencyExchangeRepository.findExchangeRequestsGroupedByCurrency(userId);
     }
 }
