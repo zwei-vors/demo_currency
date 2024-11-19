@@ -22,19 +22,17 @@ public class CurrencyExchangeService {
     private final UserService userService;
     private final CurrencyService currencyService;
 
-    final int ROUND_NUMBER = 10;
-    final int DECIMAL_PLACE = 2;
+    final int ROUND_NUMBER = 2;
 
     @Transactional
     public CurrencyExchangeResponseDto exchangeRequest(CurrencyExchangeRequestDto requestDto) {
 
         User user = userService.findUserById(requestDto.getUserId());
-        Currency fromCurrencyById = currencyService.findCurrencyById(requestDto.getFromCurrencyId());
         Currency toCurrencyById = currencyService.findCurrencyById(requestDto.getToCurrencyId());
 
         BigDecimal exchangedAmount = calculateExchangedAmount(requestDto.getAmountInKrw(), toCurrencyById);
 
-        CurrencyExchange currencyExchange = new CurrencyExchange(user, fromCurrencyById, toCurrencyById, requestDto.getAmountInKrw(), exchangedAmount, requestDto.getStatus());
+        CurrencyExchange currencyExchange = new CurrencyExchange(user, toCurrencyById, requestDto.getAmountInKrw(), exchangedAmount, requestDto.getStatus());
         CurrencyExchange savedCurrencyExchange = currencyExchangeRepository.save(currencyExchange);
         return new CurrencyExchangeResponseDto(savedCurrencyExchange);
     }
@@ -63,8 +61,6 @@ public class CurrencyExchangeService {
     }
 
     private BigDecimal calculateExchangedAmount(BigDecimal amount, Currency toCurrencyById) {
-        BigDecimal amountAfterExchange = amount
-                .divide(toCurrencyById.getExchangeRate(), ROUND_NUMBER, RoundingMode.HALF_UP);
-        return amountAfterExchange.setScale(DECIMAL_PLACE, RoundingMode.HALF_UP);
+        return amount.divide(toCurrencyById.getExchangeRate(), ROUND_NUMBER, RoundingMode.HALF_UP);
     }
 }

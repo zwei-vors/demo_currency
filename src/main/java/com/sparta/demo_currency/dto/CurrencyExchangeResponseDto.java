@@ -9,7 +9,6 @@ import java.time.LocalDateTime;
 @Getter
 public class CurrencyExchangeResponseDto {
     private Long userId;
-    private Long fromCurrencyId;
     private Long toCurrencyId;
 
     private BigDecimal amountInKrw;
@@ -20,7 +19,6 @@ public class CurrencyExchangeResponseDto {
 
     public CurrencyExchangeResponseDto(CurrencyExchange savedCurrencyExchange) {
         this.userId = savedCurrencyExchange.getUser().getId();
-        this.fromCurrencyId = savedCurrencyExchange.getFromCurrency().getId();
         this.toCurrencyId = savedCurrencyExchange.getToCurrency().getId();
         this.amountInKrw = savedCurrencyExchange.getAmountInKrw();
         this.amountAfterExchange = savedCurrencyExchange.getAmountAfterExchange();
@@ -29,9 +27,8 @@ public class CurrencyExchangeResponseDto {
         this.modifiedAt = savedCurrencyExchange.getModifiedAt();
     }
 
-    public CurrencyExchangeResponseDto(Long userId, Long fromCurrencyId, Long toCurrencyId, BigDecimal amountInKrw, BigDecimal amountAfterExchange, String status, LocalDateTime createdAt, LocalDateTime modifiedAt) {
+    public CurrencyExchangeResponseDto(Long userId, Long toCurrencyId, BigDecimal amountInKrw, BigDecimal amountAfterExchange, String status, LocalDateTime createdAt, LocalDateTime modifiedAt) {
         this.userId = userId;
-        this.fromCurrencyId = fromCurrencyId;
         this.toCurrencyId = toCurrencyId;
         this.amountInKrw = amountInKrw;
         this.amountAfterExchange = amountAfterExchange;
@@ -43,7 +40,6 @@ public class CurrencyExchangeResponseDto {
     public static CurrencyExchangeResponseDto toDto(CurrencyExchange currencyExchange) {
         return new CurrencyExchangeResponseDto(
                 currencyExchange.getUser().getId(),
-                currencyExchange.getFromCurrency().getId(),
                 currencyExchange.getToCurrency().getId(),
                 currencyExchange.getAmountInKrw(),
                 currencyExchange.getAmountAfterExchange(),

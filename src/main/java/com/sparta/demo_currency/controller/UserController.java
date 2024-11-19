@@ -36,6 +36,4 @@ public class UserController {
         userService.deleteUserById(id);
         return ResponseEntity.ok().body("정상적으로 삭제되었습니다.");
     }
-
-
 }

@@ -18,10 +18,6 @@ public class CurrencyExchange {
     private User user;
 
     @ManyToOne
-    @JoinColumn(name = "fromCurrencyId")
-    private Currency fromCurrency;
-
-    @ManyToOne
     @JoinColumn(name = "toCurrencyId")
     private Currency toCurrency;
 
@@ -31,9 +27,8 @@ public class CurrencyExchange {
     private LocalDateTime createdAt;
     private LocalDateTime modifiedAt;
 
-    public CurrencyExchange(User user, Currency fromCurrency, Currency toCurrency, BigDecimal amountInKrw, BigDecimal amountAfterExchange, String status) {
+    public CurrencyExchange(User user, Currency toCurrency, BigDecimal amountInKrw, BigDecimal amountAfterExchange, String status) {
         this.user = user;
-        this.fromCurrency = fromCurrency;
         this.toCurrency = toCurrency;
         this.amountInKrw = amountInKrw;
         this.amountAfterExchange = amountAfterExchange;

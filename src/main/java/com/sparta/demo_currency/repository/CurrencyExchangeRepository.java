@@ -14,9 +14,9 @@ public interface CurrencyExchangeRepository extends JpaRepository<CurrencyExchan
     List<CurrencyExchange> findAllByUserId(Long userId);
 
     @Query("SELECT new com.sparta.demo_currency.dto.CurrencyExchangeGroupByResponseDto(" +
-            "e.fromCurrency.currencyName, COUNT(e), SUM(e.amountInKrw)) " +
+            "e.toCurrency.currencyName, COUNT(e), SUM(e.amountInKrw)) " +
             "FROM CurrencyExchange e " +
             "WHERE e.user.id = :userId " +
-            "GROUP BY e.fromCurrency.id")
+            "GROUP BY e.toCurrency.id")
     List<CurrencyExchangeGroupByResponseDto> findExchangeRequestsGroupedByCurrency(@Param("userId") Long userId);
 }
