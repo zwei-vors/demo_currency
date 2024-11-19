@@ -6,8 +6,5 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class DemoCurrencyApplication {
 
-    public static void main(String[] args) {
-        SpringApplication.run(DemoCurrencyApplication.class, args);
-    }
-
+    public static void main(String[] args) {SpringApplication.run(DemoCurrencyApplication.class, args);}
 }

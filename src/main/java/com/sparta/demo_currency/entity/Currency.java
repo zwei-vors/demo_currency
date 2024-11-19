@@ -19,15 +19,15 @@ public class Currency {
     private String currencyName;
     private BigDecimal exchangeRate;
     private String symbol;
-    private String regionCode;
+    private BigDecimal conversionFactor;
     private LocalDateTime createdAt; // TODO: BaseEntity 분리 필요
     private LocalDateTime modifiedAt;
 
-    public Currency(String currencyName, BigDecimal exchangeRate, String symbol, String regionCode) {
+    public Currency(String currencyName, BigDecimal exchangeRate, String symbol, BigDecimal conversionFactor) {
         this.currencyName = currencyName;
         this.exchangeRate = exchangeRate;
         this.symbol = symbol;
-        this.regionCode = regionCode;
+        this.conversionFactor = conversionFactor;
     }
 
     public Currency() {}

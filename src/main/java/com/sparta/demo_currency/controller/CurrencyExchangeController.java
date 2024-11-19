@@ -1,5 +1,6 @@
 package com.sparta.demo_currency.controller;
 
+import com.sparta.demo_currency.dto.CurrencyExchangeGroupByResponseDto;
 import com.sparta.demo_currency.dto.CurrencyExchangeRequestDto;
 import com.sparta.demo_currency.dto.CurrencyExchangeResponseDto;
 import com.sparta.demo_currency.service.CurrencyExchangeService;
@@ -30,5 +31,10 @@ public class CurrencyExchangeController {
     @PatchMapping("/{id}")
     public ResponseEntity<CurrencyExchangeResponseDto> updateExchangeCurrency(@PathVariable Long id, @RequestBody String status) {
         return ResponseEntity.ok().body(currencyExchangeService.updateExchangeRequest(id, status));
+    }
+
+    @GetMapping("/grouped-by-currency/{userId}")
+    public ResponseEntity<List<CurrencyExchangeGroupByResponseDto>> getExchangeRequestsGroupedByCurrency(@PathVariable Long userId) {
+        return ResponseEntity.ok().body(currencyExchangeService.getExchangeRequestsGroupedByCurrency(userId));
     }
 }

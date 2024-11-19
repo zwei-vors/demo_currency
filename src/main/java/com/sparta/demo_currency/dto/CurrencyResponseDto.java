@@ -13,7 +13,6 @@ public class CurrencyResponseDto {
     private String currencyName;
     private BigDecimal exchangeRate;
     private String symbol;
-    private String regionCode;
     private LocalDateTime createdAt;
     private LocalDateTime modifiedAt;
 
@@ -22,17 +21,15 @@ public class CurrencyResponseDto {
         this.currencyName = currency.getCurrencyName();
         this.exchangeRate = currency.getExchangeRate();
         this.symbol = currency.getSymbol();
-        this.regionCode = currency.getRegionCode();
         this.createdAt = currency.getCreatedAt();
         this.modifiedAt = currency.getModifiedAt();
     }
 
-    public CurrencyResponseDto(Long id, String currencyName, BigDecimal exchangeRate, String symbol, String regionCode, LocalDateTime createdAt, LocalDateTime modifiedAt) {
+    public CurrencyResponseDto(Long id, String currencyName, BigDecimal exchangeRate, String symbol, LocalDateTime createdAt, LocalDateTime modifiedAt) {
         this.id = id;
         this.currencyName = currencyName;
         this.exchangeRate = exchangeRate;
         this.symbol = symbol;
-        this.regionCode = regionCode;
         this.createdAt = createdAt;
         this.modifiedAt = modifiedAt;
     }
@@ -43,7 +40,6 @@ public class CurrencyResponseDto {
             currency.getCurrencyName(),
             currency.getExchangeRate(),
             currency.getSymbol(),
-            currency.getRegionCode(),
             currency.getCreatedAt(),
             currency.getModifiedAt()
         );
