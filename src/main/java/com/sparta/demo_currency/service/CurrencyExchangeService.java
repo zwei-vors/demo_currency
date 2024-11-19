@@ -32,13 +32,9 @@ public class CurrencyExchangeService {
         Currency fromCurrencyById = currencyService.findCurrencyById(requestDto.getFromCurrencyId());
         Currency toCurrencyById = currencyService.findCurrencyById(requestDto.getToCurrencyId());
 
-        // TODO: 여기서 계산을 하는게 맞는지 고민 필요
-        BigDecimal amountAfterExchange = requestDto.getAmountInKrw()
-                .divide(toCurrencyById.getExchangeRate(), ROUND_NUMBER, RoundingMode.HALF_UP)
-                .multiply(toCurrencyById.getConversionFactor());
-        BigDecimal amountAfterExchangeWithScale = amountAfterExchange.setScale(DECIMAL_PLACE, RoundingMode.HALF_UP);
+        BigDecimal exchangedAmount = calculateExchangedAmount(requestDto.getAmountInKrw(), toCurrencyById);
 
-        CurrencyExchange currencyExchange = new CurrencyExchange(user, fromCurrencyById, toCurrencyById, requestDto.getAmountInKrw(), amountAfterExchangeWithScale, requestDto.getStatus());
+        CurrencyExchange currencyExchange = new CurrencyExchange(user, fromCurrencyById, toCurrencyById, requestDto.getAmountInKrw(), exchangedAmount, requestDto.getStatus());
         CurrencyExchange savedCurrencyExchange = currencyExchangeRepository.save(currencyExchange);
         return new CurrencyExchangeResponseDto(savedCurrencyExchange);
     }
@@ -64,5 +60,11 @@ public class CurrencyExchangeService {
 
     public List<CurrencyExchangeGroupByResponseDto> getExchangeRequestsGroupedByCurrency(Long userId) {
         return currencyExchangeRepository.findExchangeRequestsGroupedByCurrency(userId);
+    }
+
+    private BigDecimal calculateExchangedAmount(BigDecimal amount, Currency toCurrencyById) {
+        BigDecimal amountAfterExchange = amount
+                .divide(toCurrencyById.getExchangeRate(), ROUND_NUMBER, RoundingMode.HALF_UP);
+        return amountAfterExchange.setScale(DECIMAL_PLACE, RoundingMode.HALF_UP);
     }
 }

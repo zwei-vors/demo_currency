@@ -10,7 +10,6 @@ public class CurrencyExchangeGroupByResponseDto {
     private Long count;
     private BigDecimal totalAmountInKrw;
 
-    // 생성자
     public CurrencyExchangeGroupByResponseDto(String currencyName, Long count, BigDecimal totalAmountInKrw) {
         this.currencyName = currencyName;
         this.count = count;
