@@ -14,15 +14,13 @@ public class User extends BaseEntity {
 
     private String name;
     private String email;
-    private String status;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<CurrencyExchange> currencyExchange;
 
-    public User(String name, String email, String status) {
+    public User(String name, String email) {
         this.name = name;
         this.email = email;
-        this.status = status;
     }
 
     public User() {}
